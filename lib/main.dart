@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kawa_mobile_visualizer/services/customer_api.dart';
+import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 
 void main() {
-  runApp(const MyApp());
+  //Material APP fonction plus universelle
+  //Cupertino APP destiné aux application qui ne fonctionne que sur IOS
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: DashboardProduct(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -50,20 +57,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  var customers = [];
+  var products;
 
   @override
   void initState() {
     super.initState();
-
-
-    //To call the API
-    getCustomersFromAPI().then((value) => {
-      setState(() {
-        customers = value;
-      })
-    });
-
   }
 
   void _incrementCounter() {
