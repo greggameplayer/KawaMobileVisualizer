@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kawa_mobile_visualizer/services/customer_api.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,6 +50,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  var customers = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    //To call the API
+    getCustomersFromAPI().then((value) => {
+      setState(() {
+        customers = value;
+      })
+    });
+
+  }
 
   void _incrementCounter() {
     setState(() {
