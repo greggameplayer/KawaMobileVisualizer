@@ -13,15 +13,3 @@ Future<List<Customer>> getCustomersFromAPI() async{
     return [];
   }
 }
-
-
-//Future<List<Customer>> getCustomersFromAPI(String id) async{
-//  final url = Uri.parse('https://615f5fb4f7254d0017068109.mockapi.io/api/v1/customers' + id);
-//  var response = await http.get(url);
-//  if (response.statusCode == 200) {
-//    var json = response.body;
-//    return customerFromJson(json);
-//  } else {
-//    return [];
-//  }
-//}
