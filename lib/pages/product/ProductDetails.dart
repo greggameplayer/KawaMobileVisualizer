@@ -11,29 +11,55 @@ class ProductDetails extends StatefulWidget {
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
-class _ProductDetailsState extends State<ProductDetails>{
+class _ProductDetailsState extends State<ProductDetails> {
   late Product product;
 
   @override
   Widget build(BuildContext context) {
-    //Product product =  ModalRoute.of(context)!.settings.arguments as Product;
+    Product product = ModalRoute.of(context)!.settings.arguments as Product;
+    late Product productDetails;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product Details"),
-        backgroundColor: headerBackgroundColor
-      ),
+          title: Text(product.name!), backgroundColor: headerBackgroundColor),
       body: FutureBuilder<Product>(
-        future: getOneProductFromMock(ModalRoute.of(context)!.settings.arguments as String),
+        //future: getOneProductFromMock(ModalRoute.of(context)!.settings.arguments as String),
+        future: getOneProductFromMock(product.id!),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            product = snapshot.data!;
-            return Column(
-              children: [
-                Text(product.name!),
-                Text(product.details!.description!),
-              ],
-            );
+            var productDetails = snapshot.data!;
+            return Column(children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 30.0, horizontal: 20.0),
+                  child: Text(
+                    "Description : " + productDetails.details!.description!,
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 0.0, horizontal: 20.0),
+                  child: Text(
+                    "Prix : " + productDetails.details!.price!+"€",
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+
+              //Text(product.details!.description!),
+            ]);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
@@ -42,7 +68,7 @@ class _ProductDetailsState extends State<ProductDetails>{
       ),
     );
 
-    //rAlternative
+    //Alternative
     /*return Scaffold(
       appBar: AppBar(
         title: Text(product.name!),
@@ -56,5 +82,3 @@ class _ProductDetailsState extends State<ProductDetails>{
     */
   }
 }
-
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kawa_mobile_visualizer/pages/connection.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 
 void main() {
@@ -7,7 +8,8 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DashboardProduct(),
+      //home: DashboardProduct(),
+      home: ConnectionPage(),
     ),
   );
 }

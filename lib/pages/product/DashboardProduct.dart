@@ -39,8 +39,8 @@ class _DashboardProductState extends State<DashboardProduct> {
                         MaterialPageRoute(
                           builder: (context) => ProductDetails(),
                           settings: RouteSettings(
-                            //arguments: snapshot.data![index],
-                            arguments: snapshot.data![index].id!,
+                            arguments: snapshot.data![index],
+                            //arguments: snapshot.data![index].id!,
                           ),
                         ),
                     );
