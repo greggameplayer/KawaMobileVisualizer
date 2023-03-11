@@ -2,15 +2,8 @@ import 'package:kawa_mobile_visualizer/models/Product.dart';
 import 'package:kawa_mobile_visualizer/services/product_api.dart';
 import 'package:flutter/material.dart';
 
-
-//To call the API
-//getOneProductFromMock("1").then((value) => {
-//setState(() {
-//products = value;
-//print(products.name);
-//print(products.stock);
-//})
-//});
+import '../../utils/constants.dart';
+import 'ProductDetails.dart';
 
 class DashboardProduct extends StatefulWidget {
   const DashboardProduct({super.key});
@@ -24,7 +17,8 @@ class _DashboardProductState extends State<DashboardProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lists des produits'),
+        title: const Text('Lites des produits'),
+        backgroundColor: headerBackgroundColor
       ),
       body: FutureBuilder<List<Product>>(
         future: getProductsFromMock(),
@@ -33,19 +27,24 @@ class _DashboardProductState extends State<DashboardProduct> {
             return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(snapshot.data![index].name!),
-                  subtitle: Text(snapshot.data![index].details!.description!),
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text('Id produit'),
-                            content: Text(snapshot.data![index].id!),
-                          );
-                        });
-                  },
+                return Container(
+                  color: Colors.grey[200],
+                  child: ListTile(
+                    title: Text(snapshot.data![index].name!),
+                    subtitle: Text(snapshot.data![index].details!.description!),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetails(),
+                          settings: RouteSettings(
+                            //arguments: snapshot.data![index],
+                            arguments: snapshot.data![index].id!,
+                          ),
+                        ),
+                    );
+                  }),
                 );
               },
             );
