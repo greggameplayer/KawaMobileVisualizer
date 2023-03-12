@@ -38,6 +38,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   ar_flutter_plugin: ^0.7.3
+  vector_math: ^2.1.4
 
 dev_dependencies:
   test: ^1.16.4
@@ -60,8 +61,8 @@ flutter:
     - assets/images/logo_without_background.png
     - assets/images/logo_with_background.png
     - assets/images/logo_w_background.jpg
-    - assets/model3D/coffee_cup_blender.glb
-    - assets/model3D/coffee_machine.glb
+    - assets/images/triangle.png
+    - assets/model3D/
 
 
   # The following line ensures that the Material Icons font is

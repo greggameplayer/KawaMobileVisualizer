@@ -4,6 +4,7 @@ import 'package:kawa_mobile_visualizer/services/product_api.dart';
 
 import '../../utils/constants.dart';
 import '../../widgets/button.dart';
+import 'objectViewAR.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -67,7 +68,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                         padding: const EdgeInsets.only(bottom: 60.0),
                         child: ElevatedButton(
                           style: styleButtonApp,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LocalAndWebObjectsView(),
+                              ),
+                            );
+                          },
                           child: const Text(
                             "Visualiser",
                             style: TextStyle(fontSize: 18.0),
