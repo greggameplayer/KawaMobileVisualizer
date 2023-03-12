@@ -3,6 +3,7 @@ import 'package:kawa_mobile_visualizer/models/Product.dart';
 import 'package:kawa_mobile_visualizer/services/product_api.dart';
 
 import '../../utils/constants.dart';
+import '../../widgets/button.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -49,7 +50,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 0.0, horizontal: 20.0),
                   child: Text(
-                    "Prix : " + productDetails.details!.price!+"€",
+                    "Prix : " + productDetails.details!.price! + "€",
                     style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -57,7 +58,24 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
               ),
-
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 60.0),
+                        child: ElevatedButton(
+                          style: styleButtonApp,
+                          onPressed: () {},
+                          child: const Text(
+                            "Visualiser",
+                            style: TextStyle(fontSize: 18.0),
+                          ),
+                        ),
+                      )),
+                ),
+              ),
               //Text(product.details!.description!),
             ]);
           } else if (snapshot.hasError) {

@@ -6,7 +6,7 @@ void main() {
   //Material APP fonction plus universelle
   //Cupertino APP destiné aux application qui ne fonctionne que sur IOS
   runApp(
-    MaterialApp(
+    const MaterialApp(
       debugShowCheckedModeBanner: false,
       //home: DashboardProduct(),
       home: ConnectionPage(),

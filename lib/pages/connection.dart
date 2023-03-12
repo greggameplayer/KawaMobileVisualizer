@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 
 import '../utils/constants.dart';
+import '../widgets/button.dart';
 
 class ConnectionPage extends StatefulWidget {
   const ConnectionPage({Key? key}) : super(key: key);
@@ -28,12 +29,15 @@ class _ConnectionPageState extends State<ConnectionPage> {
                   height: 300,
                 )),
           ),
-          Container(
-            height: 2 * MediaQuery.of(context).size.height / 3,
-            color: Colors.white,
-            child: const Padding(
-              padding: EdgeInsets.only(top: 30.0),
-              child: ConnectionForm(),
+
+          Expanded(
+            child:Container(
+              height: 2 * MediaQuery.of(context).size.height / 3,
+              color: Colors.white,
+              child: const Padding(
+                padding: EdgeInsets.only(top: 30.0),
+                child: ConnectionForm(),
+              ),
             ),
           ),
         ],
@@ -110,18 +114,38 @@ class ConnectionFormState extends State<ConnectionForm> {
               },
             ),
           ),
-          Padding(
+          Expanded(
+              child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                    padding: const EdgeInsets.only(bottom: 60.0),
+                    child: ElevatedButton(
+                        style: styleButtonApp,
+                        child: const Text(
+                          "Visualiser",
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        onPressed: () {
+                          // Validate returns true if the form is valid, or false otherwise.
+                          if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Connexion en cours...')));
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DashboardProduct(),
+                              ),
+                            );
+                          }
+                        }))),
+          ))
+          /*Padding(
             padding: const EdgeInsets.only(top: 25.0),
             child: ElevatedButton(
-              style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all<Size>(Size(200, 50)),
-                backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(17.0),
-                  ),
-                ),
-              ),
+              style: styleButtonApp,
               onPressed: () {
                 // Validate returns true if the form is valid, or false otherwise.
                 if (_formKey.currentState!.validate()) {
@@ -142,7 +166,7 @@ class ConnectionFormState extends State<ConnectionForm> {
                 ),
               ),
             ),
-          ),
+          ),*/
         ],
       ),
     );

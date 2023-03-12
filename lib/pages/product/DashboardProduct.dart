@@ -17,7 +17,7 @@ class _DashboardProductState extends State<DashboardProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lites des produits'),
+        title: const Text('Liste des produits'),
         backgroundColor: headerBackgroundColor
       ),
       body: FutureBuilder<List<Product>>(
@@ -40,7 +40,6 @@ class _DashboardProductState extends State<DashboardProduct> {
                           builder: (context) => ProductDetails(),
                           settings: RouteSettings(
                             arguments: snapshot.data![index],
-                            //arguments: snapshot.data![index].id!,
                           ),
                         ),
                     );
