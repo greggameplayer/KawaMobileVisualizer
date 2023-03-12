@@ -4,7 +4,7 @@ import 'package:kawa_mobile_visualizer/services/product_api.dart';
 
 import '../../utils/constants.dart';
 import '../../widgets/button.dart';
-import 'objectViewAR.dart';
+import 'model3dViewer.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -62,26 +62,32 @@ class _ProductDetailsState extends State<ProductDetails> {
               Expanded(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 60.0),
-                        child: ElevatedButton(
-                          style: styleButtonApp,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LocalAndWebObjectsView(),
+                  child: Column(children: [
+                    Expanded(
+                        child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: ElevatedButton(
+                                style: styleButtonApp,
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ViewerModel3D(),
+                                      settings: RouteSettings(
+                                        arguments: snapshot.data!,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: const Text(
+                                  "Visualiser",
+                                  style: TextStyle(fontSize: 18.0),
+                                ),
                               ),
-                            );
-                          },
-                          child: const Text(
-                            "Visualiser",
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                        ),
-                      )),
+                            ))),
+                  ]),
                 ),
               ),
               //Text(product.details!.description!),
