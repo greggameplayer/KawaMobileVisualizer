@@ -60,6 +60,8 @@ flutter:
     - assets/images/logo_without_background.png
     - assets/images/logo_with_background.png
     - assets/images/logo_w_background.jpg
+    - assets/model3D/coffee_cup_blender.glb
+    - assets/model3D/coffee_machine.glb
 
 
   # The following line ensures that the Material Icons font is
