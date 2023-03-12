@@ -3,6 +3,7 @@ import 'package:kawa_mobile_visualizer/services/product_api.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/constants.dart';
+import '../connection.dart';
 import 'ProductDetails.dart';
 
 class DashboardProduct extends StatefulWidget {
@@ -17,9 +18,22 @@ class _DashboardProductState extends State<DashboardProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Liste des produits'),
-        backgroundColor: headerBackgroundColor
-      ),
+          title: const Text('Liste des produits'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.logout),
+              tooltip: 'Show Snackbar',
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConnectionPage(),
+                  ),
+                );
+              },
+            ),
+          ],
+          backgroundColor: headerBackgroundColor),
       body: FutureBuilder<List<Product>>(
         future: getProductsFromMock(),
         builder: (context, snapshot) {
@@ -30,20 +44,22 @@ class _DashboardProductState extends State<DashboardProduct> {
                 return Container(
                   color: Colors.grey[200],
                   child: ListTile(
-                    title: Text(snapshot.data![index].name!),
-                    subtitle: Text(snapshot.data![index].details!.description!),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetails(),
-                          settings: RouteSettings(
-                            arguments: snapshot.data![index],
+                      title: Text(snapshot.data![index].name!),
+                      subtitle:
+                          Text(snapshot.data![index].details!.description!),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetails(),
+                            settings: RouteSettings(
+                              arguments: snapshot.data![index],
+                            ),
                           ),
-                        ),
-                    );
-                  }),
+                        );
+                      }),
                 );
               },
             );

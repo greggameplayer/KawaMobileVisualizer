@@ -32,7 +32,6 @@ class _ConnectionPageState extends State<ConnectionPage> {
 
           Expanded(
             child:Container(
-              height: 2 * MediaQuery.of(context).size.height / 3,
               color: Colors.white,
               child: const Padding(
                 padding: EdgeInsets.only(top: 30.0),
@@ -124,7 +123,7 @@ class ConnectionFormState extends State<ConnectionForm> {
                     child: ElevatedButton(
                         style: styleButtonApp,
                         child: const Text(
-                          "Visualiser",
+                          "Connexion",
                           style: TextStyle(fontSize: 18.0),
                         ),
                         onPressed: () {
@@ -142,31 +141,6 @@ class ConnectionFormState extends State<ConnectionForm> {
                           }
                         }))),
           ))
-          /*Padding(
-            padding: const EdgeInsets.only(top: 25.0),
-            child: ElevatedButton(
-              style: styleButtonApp,
-              onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Connexion en cours...')));
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DashboardProduct(),
-                      ),
-                    );
-                }
-              },
-              child: const Text(
-                'Connexion',
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
-              ),
-            ),
-          ),*/
         ],
       ),
     );
