@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/models/Product.dart';
 import 'package:kawa_mobile_visualizer/services/product_api.dart';
 
@@ -7,26 +10,27 @@ import '../../widgets/button.dart';
 import 'model3dViewer.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+  //final String productName;
+  final String productId;
+  final String productName;
+  const ProductDetails({Key? key, required this.productId, required this.productName}): super(key: key);
 
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  late Product product;
 
   @override
   Widget build(BuildContext context) {
-    Product product = ModalRoute.of(context)!.settings.arguments as Product;
     late Product productDetails;
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(product.name!), backgroundColor: headerBackgroundColor),
+          title: Text(widget.productName), backgroundColor: headerBackgroundColor),
       body: FutureBuilder<Product>(
         //future: getOneProductFromMock(ModalRoute.of(context)!.settings.arguments as String),
-        future: getOneProductFromMock(product.id!),
+        future: getOneProductFromMock(widget.productId),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var productDetails = snapshot.data!;
@@ -71,15 +75,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: ElevatedButton(
                                 style: styleButtonApp,
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ViewerModel3D(),
-                                      settings: RouteSettings(
-                                        arguments: snapshot.data!,
-                                      ),
-                                    ),
-                                  );
+                                  context.pushNamed("showModel3D",extra:productDetails);
                                 },
                                 child: const Text(
                                   "Visualiser",
@@ -99,18 +95,5 @@ class _ProductDetailsState extends State<ProductDetails> {
         },
       ),
     );
-
-    //Alternative
-    /*return Scaffold(
-      appBar: AppBar(
-        title: Text(product.name!),
-      ),
-      body: Column(
-        children: [
-          Text(product.details!.description!),
-        ],
-      ),
-    ) ;
-    */
   }
 }
