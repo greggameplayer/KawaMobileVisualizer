@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 
 import '../utils/constants.dart';
@@ -132,13 +133,9 @@ class ConnectionFormState extends State<ConnectionForm> {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text('Connexion en cours...')));
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DashboardProduct(),
-                              ),
-                            );
+                            GoRouter.of(context).goNamed('dashboardProduct');
                           }
+
                         }))),
           ))
         ],

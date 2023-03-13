@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/models/Product.dart';
 import 'package:kawa_mobile_visualizer/services/product_api.dart';
 import 'package:flutter/material.dart';
@@ -49,17 +50,9 @@ class _DashboardProductState extends State<DashboardProduct> {
                           Text(snapshot.data![index].details!.description!),
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductDetails(),
-                            settings: RouteSettings(
-                              arguments: snapshot.data![index],
-                            ),
-                          ),
-                        );
-                      }),
+                      onTap: () =>
+                        context.goNamed('detailsProduct', params: {'productId': snapshot.data![index].id!, 'productName': snapshot.data![index].name!})
+                      ),
                 );
               },
             );
