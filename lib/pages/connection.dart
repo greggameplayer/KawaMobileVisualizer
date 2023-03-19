@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
@@ -60,8 +61,13 @@ class ConnectionFormState extends State<ConnectionForm> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+
+
   @override
   Widget build(BuildContext context) {
+
+    checkConnexionWithDeepLink(context);
+
     return Form(
       key: _formKey,
       child: Column(
@@ -142,4 +148,22 @@ class ConnectionFormState extends State<ConnectionForm> {
       ),
     );
   }
+}
+
+void checkConnexionWithDeepLink(BuildContext context){
+  FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+    print("Link :" );
+    print("Link :" );
+    print("Link :" );
+    print(dynamicLinkData.link.path);
+    print(dynamicLinkData.link.fragment);
+    print(dynamicLinkData.link.toString());
+    print("End");
+    print("End");
+    print("End");
+    print("End");
+    GoRouter.of(context).go(dynamicLinkData.link.fragment);
+  }).onError((error) {
+    // Handle errors
+  });
 }

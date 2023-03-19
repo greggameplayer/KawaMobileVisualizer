@@ -25,12 +25,7 @@ class _DashboardProductState extends State<DashboardProduct> {
               icon: const Icon(Icons.logout),
               tooltip: 'Show Snackbar',
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConnectionPage(),
-                  ),
-                );
+                GoRouter.of(context).goNamed('connection');
               },
             ),
           ],

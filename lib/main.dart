@@ -1,37 +1,33 @@
-import 'dart:async';
-import 'dart:collection';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
+import 'package:kawa_mobile_visualizer/firebase_options.dart';
 import 'package:kawa_mobile_visualizer/pages/connection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 import 'package:kawa_mobile_visualizer/pages/product/ProductDetails.dart';
 import 'package:kawa_mobile_visualizer/pages/product/model3dViewer.dart';
-
 import 'models/Product.dart';
 
 
-void main(){
-  runApp(const MyApp());
-}
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  static const String _title = 'GoRouter Demo';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: _router,
-    );
-  }
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseDynamicLinks.instance.onLink;
+
+  runApp(MaterialApp.router(routerConfig: _router, debugShowCheckedModeBanner: false,));
 }
 
-/// The route configuration.
+
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
+      name: 'connection',
       builder: (BuildContext context, GoRouterState state) {
         return const ConnectionPage();
       }),
@@ -60,6 +56,7 @@ final GoRouter _router = GoRouter(
         ]
     ),
   ],
+
 );
 
 
