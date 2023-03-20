@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:kawa_mobile_visualizer/firebase_options.dart';
 import 'package:kawa_mobile_visualizer/pages/connection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
@@ -12,25 +11,25 @@ import 'models/Product.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Firebase Deeplink
   await Firebase.initializeApp();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   FirebaseDynamicLinks.instance.onLink;
 
-  runApp(MaterialApp.router(routerConfig: _router, debugShowCheckedModeBanner: false,));
+  runApp(MaterialApp.router(
+    routerConfig: _router, debugShowCheckedModeBanner: false,));
 }
 
 
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
-      path: '/',
-      name: 'connection',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ConnectionPage();
-      }),
+        path: '/',
+        name: 'connection',
+        builder: (BuildContext context, GoRouterState state) {
+          return const ConnectionPage();
+        }),
     GoRoute(
         path: '/dashboardProduct',
         name: 'dashboardProduct',
@@ -42,7 +41,9 @@ final GoRouter _router = GoRouter(
             path: 'detailsProduct/:productId/:productName',
             name: 'detailsProduct',
             builder: (BuildContext context, GoRouterState state) {
-              return ProductDetails(productId: state.params['productId'] as String, productName: state.params['productName'] as String);
+              return ProductDetails(
+                  productId: state.params['productId'] as String,
+                  productName: state.params['productName'] as String);
             },
           ),
           GoRoute(
@@ -58,7 +59,5 @@ final GoRouter _router = GoRouter(
   ],
 
 );
-
-
 
 

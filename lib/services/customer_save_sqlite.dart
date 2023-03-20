@@ -119,3 +119,9 @@ Future<CustomerSave> getCustomerInDbById(int id) async {
   return customer;
 }
 
+
+Future<void> deleteDb() async{
+  var databasesPath = await getDatabasesPath();
+  String path = join(databasesPath, 'customer.db');
+  await deleteDatabase(path);
+}

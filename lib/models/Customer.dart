@@ -82,31 +82,8 @@ class Customer {
   }
 }
 
-class CustomerSingleton {
-  static final _singleton = CustomerSingleton._internal();
-  var id;
-  var email;
-  var token;
-
-
-
-  factory CustomerSingleton() {
-    return _singleton;
-  }
-
-  CustomerSingleton._internal();
-
-  void setValuesFromJson(Map<String, dynamic> json){
-    this.id= json['id'];
-    this.email = json['email'];
-    this.token = json['token'];
-  }
-}
-
-
-
-
 class CustomerSave {
+  //TODO update to save only the token
   final int id;
   final String email;
   final String token;
