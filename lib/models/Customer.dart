@@ -34,6 +34,7 @@ class Customer {
         this.email,
         this.orders});
 
+
   Customer.fromJson(Map<String, dynamic> json) {
     createdAt = json['createdAt'];
     name = json['name'];
@@ -79,4 +80,56 @@ class Customer {
     }
     return data;
   }
+}
+
+class CustomerSingleton {
+  static final _singleton = CustomerSingleton._internal();
+  var id;
+  var email;
+  var token;
+
+
+
+  factory CustomerSingleton() {
+    return _singleton;
+  }
+
+  CustomerSingleton._internal();
+
+  void setValuesFromJson(Map<String, dynamic> json){
+    this.id= json['id'];
+    this.email = json['email'];
+    this.token = json['token'];
+  }
+}
+
+
+
+
+class CustomerSave {
+  final int id;
+  final String email;
+  final String token;
+
+  const CustomerSave({
+    required this.id,
+    required this.email,
+    required this.token,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'email': email,
+      'token': token,
+    };
+  }
+
+  // Implement toString to make it easier to see information about
+  // each dog when using the print statement.
+  @override
+  String toString() {
+    return 'User {id: $id, name: $email, age: $token}';
+  }
+
 }

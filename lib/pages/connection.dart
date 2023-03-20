@@ -1,8 +1,10 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
-
+import 'package:kawa_mobile_visualizer/models/Customer.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+import '../services/customer_save_sqlite.dart';
 import '../utils/constants.dart';
 import '../widgets/button.dart';
 
@@ -151,7 +153,7 @@ class ConnectionFormState extends State<ConnectionForm> {
 }
 
 void checkConnexionWithDeepLink(BuildContext context){
-  FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+  FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) async {
     print("Link :" );
     print("Link :" );
     print("Link :" );
@@ -162,8 +164,23 @@ void checkConnexionWithDeepLink(BuildContext context){
     print("End");
     print("End");
     print("End");
+    //TODO CallAPI to check user info
+
+
+    //TODO save user in db
+    //To delete
+
+
+
+
+
+    //TODO initiate singleton
     GoRouter.of(context).go(dynamicLinkData.link.fragment);
   }).onError((error) {
     // Handle errors
   });
 }
+
+// Define a function that inserts dogs into the database
+
+
