@@ -14,6 +14,8 @@ import 'models/Product.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Firebase Deeplink
   await Firebase.initializeApp();
 
   FirebaseDynamicLinks.instance.onLink;
@@ -50,7 +52,9 @@ final GoRouter _router = GoRouter(
             path: 'detailsProduct/:productId/:productName',
             name: 'detailsProduct',
             builder: (BuildContext context, GoRouterState state) {
-              return ProductDetails(productId: state.params['productId'] as String, productName: state.params['productName'] as String);
+              return ProductDetails(
+                  productId: state.params['productId'] as String,
+                  productName: state.params['productName'] as String);
             },
           ),
           GoRoute(
@@ -66,7 +70,5 @@ final GoRouter _router = GoRouter(
   ],
 
 );
-
-
 
 

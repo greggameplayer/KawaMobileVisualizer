@@ -187,6 +187,17 @@ Future<void> checkConnexionWithDeepLink(BuildContext context) async {
     print("End");
     print("End");
     print("End");
+    //TODO CallAPI to check user info
+
+
+    //TODO save user in db
+    //To delete
+
+
+
+
+
+    //TODO initiate singleton
     GoRouter.of(context).go(dynamicLinkData.link.fragment);
   }).onError((error) {
     // Handle errors
