@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:kawa_mobile_visualizer/firebase_options.dart';
+
 import 'package:kawa_mobile_visualizer/pages/connection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 import 'package:kawa_mobile_visualizer/pages/product/ProductDetails.dart';
 import 'package:kawa_mobile_visualizer/pages/product/model3dViewer.dart';
+import 'package:kawa_mobile_visualizer/pages/scan_qr_code.dart';
+
 import 'models/Product.dart';
 
 
@@ -14,15 +16,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   FirebaseDynamicLinks.instance.onLink;
+
+
 
   runApp(MaterialApp.router(routerConfig: _router, debugShowCheckedModeBanner: false,));
 }
-
-
 final GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
@@ -30,7 +29,16 @@ final GoRouter _router = GoRouter(
       name: 'connection',
       builder: (BuildContext context, GoRouterState state) {
         return const ConnectionPage();
-      }),
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'qrCode',
+          name: 'connectionWithQrCode',
+          builder: (BuildContext context, GoRouterState state) {
+            return const ConnectionWithQrCode();},
+        ),
+    ]
+      ),
     GoRoute(
         path: '/dashboardProduct',
         name: 'dashboardProduct',
