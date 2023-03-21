@@ -66,7 +66,7 @@ Future<void> deleteUserinSqlite(customer) async {
   await deleteCustomer(customer);
 }
 
-Future<List<CustomerSave>> getCustomersInDb(customer) async {
+Future<List<CustomerSave>> getCustomersInDb() async {
   late Future<List<CustomerSave>> customers;
   final database = openDatabase(
     join(await getDatabasesPath(), 'customer.db'),
