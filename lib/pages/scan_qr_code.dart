@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../services/connection.dart';
 import '../utils/constants.dart';
 
 class ConnectionWithQrCode extends StatelessWidget {
@@ -23,15 +24,14 @@ class ConnectionWithQrCode extends StatelessWidget {
         onDetect: (capture) {
           final List<Barcode> barcodes = capture.barcodes;
           for (final barcode in barcodes) {
-            debugPrint(barcode.rawValue);
-            String token = barcode.rawValue as String;
+            String token = barcode.rawValue!;
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(token),
                 duration: const Duration(seconds: 2),
               ),
             );
-            GoRouter.of(context).goNamed('dashboardProduct');
+            checkAndConnect(token, context);
           }
         },
       ),

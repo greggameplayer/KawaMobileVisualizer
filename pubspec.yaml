@@ -46,6 +46,7 @@ dependencies:
   path:
   sqflite_common_ffi: ^2.2.2
   mobile_scanner: ^3.1.1
+  flutter_launcher_icons: ^0.12.0
 
 
 dev_dependencies:
@@ -64,12 +65,21 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/logo_without_text.jpg"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+
 flutter:
   assets:
     - assets/images/logo_without_background.png
     - assets/images/logo_with_background.png
     - assets/images/logo_w_background.jpg
-    - assets/images/triangle.png
+    - assets/images/logo_without_text.jpg
     - assets/model3D/
     - assets/model3D/coffee_cup.gltf
     - assets/model3D/coffee_cup.glb

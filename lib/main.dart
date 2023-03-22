@@ -14,13 +14,9 @@ import 'models/Product.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   //Firebase Deeplink
   await Firebase.initializeApp();
-
   FirebaseDynamicLinks.instance.onLink;
-
-
 
   runApp(MaterialApp.router(routerConfig: _router, debugShowCheckedModeBanner: false,));
 }

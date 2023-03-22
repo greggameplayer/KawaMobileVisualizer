@@ -1,6 +1,7 @@
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../services/connection.dart';
 import '../utils/constants.dart';
 import '../widgets/button.dart';
 
@@ -20,7 +21,7 @@ class _ConnectionPageState extends State<ConnectionPage> {
           Container(
             color: Colors.white,
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 3,
+            //height: MediaQuery.of(context).size.height / 3,
             child: Align(
                 alignment: Alignment.center,
                 child: Image.asset(
@@ -65,7 +66,6 @@ class ConnectionFormState extends State<ConnectionForm> {
 
   @override
   Widget build(BuildContext context) {
-
     checkConnexionWithDeepLink(context);
 
     return Form(
@@ -135,12 +135,8 @@ class ConnectionFormState extends State<ConnectionForm> {
                             onPressed: () {
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Connexion en cours...')));
-                                GoRouter.of(context).goNamed('dashboardProduct');
+                                checkAndConnect(tokenController.text, context);
                               }
-
                             }),
                         const Padding(
                           padding: EdgeInsets.only(top: 10.0),
@@ -154,56 +150,6 @@ class ConnectionFormState extends State<ConnectionForm> {
     );
   }
 }
-
-Future<void> checkConnexionWithDeepLink(BuildContext context) async {
-  FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
-
-    //https://kawamobilevisualizer.page.link/?link=htt?link=ps://kawamobilevisualizer.page.link/dashboardProduct?token=123coucou&apn=com.kawa.kawa_mobile_visualizer
-    //https://kawamobilevisualizer.page.link/?link=https://kawamobilevisualizer.page.link/connect?token=123coucou&apn=com.kawa.kawa_mobile_visualizer
-    print("Start");
-    print(dynamicLinkData.toString());
-    print(dynamicLinkData.utmParameters.toString());
-    print(dynamicLinkData.link.toString());
-    print(dynamicLinkData.link.pathSegments.toString());
-    print(dynamicLinkData.link.path.toString());
-    print(dynamicLinkData.link.normalizePath().toString());
-  print(dynamicLinkData.link.queryParameters.toString());
-
-    dynamicLinkData.utmParameters.forEach((key, value) {
-      print("Key : $key");
-      print("Value : $value");
-    });
-    dynamicLinkData.link.queryParameters.forEach((key, value) {
-      print("Key : $key");
-      print("Value : $value");
-    });
-    print("Link :" );
-    print("Link :" );
-    print("Link :" );
-    print(dynamicLinkData.link.path);
-    print(dynamicLinkData.link.fragment);
-    print(dynamicLinkData.link.toString());
-    print("End");
-    print("End");
-    print("End");
-    print("End");
-    //TODO CallAPI to check user info
-
-
-    //TODO save user in db
-    //To delete
-
-
-
-
-
-    //TODO initiate singleton
-    GoRouter.of(context).go(dynamicLinkData.link.fragment);
-  }).onError((error) {
-    // Handle errors
-  });
-}
-
 
 class ButtonQrCode extends StatelessWidget {
   const ButtonQrCode({Key? key}) : super(key: key);
@@ -220,3 +166,6 @@ class ButtonQrCode extends StatelessWidget {
     );
   }
 }
+
+
+
