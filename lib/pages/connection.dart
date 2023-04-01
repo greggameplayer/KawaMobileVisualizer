@@ -16,33 +16,37 @@ class _ConnectionPageState extends State<ConnectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            width: MediaQuery.of(context).size.width,
-            //height: MediaQuery.of(context).size.height / 3,
-            child: Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  "assets/images/logo_w_background.jpg",
-                  width: 300,
-                  height: 300,
-                )),
-          ),
-
-          Expanded(
-            child:Container(
-              color: Colors.white,
-              child: const Padding(
-                padding: EdgeInsets.only(top: 30.0),
-                child:
-                    ConnectionForm(),
-                    //ButtonQrCode(),
-                ),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.white,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                //height: MediaQuery.of(context).size.height / 3,
+                child: Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      "assets/images/logo_w_background.jpg",
+                      width: 300,
+                      height: 300,
+                    )),
               ),
-            ),
-        ],
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: const Padding(
+                    padding: EdgeInsets.only(top: 30.0),
+                    child:
+                        ConnectionForm(),
+                    ),
+                  ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -118,33 +122,28 @@ class ConnectionFormState extends State<ConnectionForm> {
             ),
           ),
           Expanded(
-              child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Column(
-                      children: [
-                        ElevatedButton(
-                            style: styleButtonApp,
-                            child: const Text(
-                              "Connexion",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                            onPressed: () {
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState!.validate()) {
-                                checkAndConnect(tokenController.text, context);
-                              }
-                            }),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 10.0),
-                          child: ButtonQrCode(),
-                        ),
-                      ],
-                    ))),
-          ))
+            child: Column(
+              children:[
+                const Spacer(),
+                ElevatedButton(
+                    style: styleButtonApp,
+                    child: const Text(
+                      "Connexion",
+                      style: TextStyle(fontSize: 18.0),
+                    ),
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false otherwise.
+                      if (_formKey.currentState!.validate()) {
+                        checkAndConnect(tokenController.text, context);
+                      }
+                    }),
+                const Padding(
+                  padding: EdgeInsets.only(top: 10.0, bottom: 25.0),
+                  child: ButtonQrCode(),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
