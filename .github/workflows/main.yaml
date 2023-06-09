@@ -47,7 +47,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            build/app/outputs/flutter-apk/app-release.zip
+            build/app/outputs/flutter-apk
           tag_name: ${{ steps.get_flutter_version.outputs.version_number }}
           body: |
             Release ${{ steps.get_flutter_version.outputs.version_number }}
