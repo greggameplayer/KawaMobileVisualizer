@@ -36,23 +36,23 @@ jobs:
     needs: build_android
     runs-on: ubuntu-latest
     steps:
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get flutter version
+        id: get_flutter_version
+        uses: its404/get-flutter-version@v1.0.0
+      - name: Output flutter version
+        run: echo 'version_number:' ${{ steps.get_flutter_version.outputs.version_number }} ' build_number:' ${{ steps.get_flutter_version.outputs.build_number }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1.0.0  # Remplacez par le tag/version de votre release
-          release_name: Release v1.0.0  # Remplacez par le nom de votre release
+          files: |
+            build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+            build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+            build/app/outputs/flutter-apk/app-x86_64-release.apk
+          tag_name: ${{ steps.get_flutter_version.outputs.version_number }}
           body: |
-            Description de la release
+            Release ${{ steps.get_flutter_version.outputs.version_number }}
+          draft: false
+          prerelease: false
 
-      - name: Upload APK
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/app/outputs/flutter-apk/app-release.apk  # Remplacez le chemin par le chemin vers votre APK généré
-          asset_name: app-release.apk  # Nom du fichier APK dans la release
-          asset_content_type: application/vnd.android.package-archive
