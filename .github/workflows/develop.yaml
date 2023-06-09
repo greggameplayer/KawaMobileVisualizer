@@ -23,3 +23,9 @@ jobs:
       run: flutter pub get
     - name: Start release build
       run: flutter build appbundle
+    - name: Run tests
+      run: flutter test
+    - name: Build Android
+      run: flutter build apk --split-per-abi
+      #build bundle
+      #push github (récupérer dans pusec.yaml (grep sur la bonne ligne)
