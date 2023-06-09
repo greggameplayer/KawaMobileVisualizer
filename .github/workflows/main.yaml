@@ -1,0 +1,74 @@
+name: Application CI
+on:
+  push:
+    branches:
+      - feature/cicd
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: "12.x"
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    - run: flutter --version
+    - name: Get dependencies
+      run: flutter pub get
+    - name: Start release build
+      run: flutter build appbundle
+    - name: Run tests
+      run: flutter test
+
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Android
+        run: flutter build apk --release --split-per-abi
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/
+
+
+  publish_release:
+    needs: build_android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0  # Remplacez par le tag/version de votre release
+          release_name: Release v1.0.0  # Remplacez par le nom de votre release
+          body: |
+            Description de la release
+
+      - name: Upload APK
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/app/outputs/flutter-apk/app-release.apk  # Remplacez le chemin par le chemin vers votre APK généré
+          asset_name: app-release.apk  # Nom du fichier APK dans la release
+          asset_content_type: application/vnd.android.package-archive

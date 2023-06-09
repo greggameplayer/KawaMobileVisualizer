@@ -2,10 +2,7 @@ name: Application CI
 on:
   push:
     branches:
-      - feature/cicd
-  pull_request:
-    branches:
-      - feature/cicd
+      - develop
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +22,3 @@ jobs:
       run: flutter build appbundle
     - name: Run tests
       run: flutter test
-    - name: Build Android
-      run: flutter build apk --split-per-abi
-      #build bundle
-      #push github (récupérer dans pusec.yaml (grep sur la bonne ligne)
