@@ -5,7 +5,7 @@ on:
       - feature/cicd
 
 jobs:
-  build:
+  build_android:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,30 +23,14 @@ jobs:
       run: flutter build appbundle
     - name: Run tests
       run: flutter test
+    - name: Build Android
+      run: flutter build apk --release --split-per-abi
 
-  build_android:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 'stable'
-
-      - name: Check out code
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build Android
-        run: flutter build apk --release --split-per-abi
-
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-release
-          path: build/app/outputs/flutter-apk/
-
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release
+        path: build/app/outputs/flutter-apk/
 
   publish_release:
     needs: build_android
