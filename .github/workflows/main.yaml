@@ -44,7 +44,7 @@ jobs:
       - name: Unzip file
         run: |
           sudo apt-get install unzip
-          unzip build/app/outputs/flutter-apk/app-release.zip -d build/app/outputs/flutter-apk/
+          unzip build/app/outputs/flutter-apk/app-release -d build/app/outputs/flutter-apk/
       - name: Output flutter version
         run: echo 'version_number:' ${{ steps.get_flutter_version.outputs.version_number }} ' build_number:' ${{ steps.get_flutter_version.outputs.build_number }}
       - name: Release
