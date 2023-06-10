@@ -31,30 +31,23 @@ jobs:
       with:
         name: app-release
         path: build/app/outputs/flutter-apk/
-
-  publish_release:
-    needs: build_android
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Get flutter version
-        id: get_flutter_version
-        uses: its404/get-flutter-version@v1.0.0
-      - name: Unzip file
-        run: |
-          sudo apt-get install unzip
-          ls -l
-      - name: Output flutter version
-        run: echo 'version_number:' ${{ steps.get_flutter_version.outputs.version_number }} ' build_number:' ${{ steps.get_flutter_version.outputs.build_number }}
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            build/app/outputs/flutter-apk
-          tag_name: ${{ steps.get_flutter_version.outputs.version_number }}
-          body: |
-            Release ${{ steps.get_flutter_version.outputs.version_number }}
-          draft: false
-          prerelease: false
-          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+    - name: Get flutter version
+      id: get_flutter_version
+      uses: its404/get-flutter-version@v1.0.0
+    - name: Unzip file
+      run: |
+        sudo apt-get install unzip
+        ls -l
+    - name: Output flutter version
+      run: echo 'version_number:' ${{ steps.get_flutter_version.outputs.version_number }} ' build_number:' ${{ steps.get_flutter_version.outputs.build_number }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          build/app/outputs/flutter-apk
+        tag_name: ${{ steps.get_flutter_version.outputs.version_number }}
+        body: |
+          Release ${{ steps.get_flutter_version.outputs.version_number }}
+        draft: false
+        prerelease: false
+        token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
