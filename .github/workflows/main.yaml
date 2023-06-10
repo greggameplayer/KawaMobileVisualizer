@@ -37,6 +37,7 @@ jobs:
     - name: Unzip file
       run: |
         sudo apt-get install unzip
+        cd build/app/outputs/flutter-apk
         ls -l
     - name: Output flutter version
       run: echo 'version_number:' ${{ steps.get_flutter_version.outputs.version_number }} ' build_number:' ${{ steps.get_flutter_version.outputs.build_number }}
@@ -44,7 +45,9 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          build/app/outputs/flutter-apk
+          build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          build/app/outputs/flutter-apk/app-x86_64-release.apk
         tag_name: ${{ steps.get_flutter_version.outputs.version_number }}
         body: |
           Release ${{ steps.get_flutter_version.outputs.version_number }}
