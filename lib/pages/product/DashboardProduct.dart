@@ -19,16 +19,16 @@ class _DashboardProductState extends State<DashboardProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Liste des produits'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.logout),
-              tooltip: 'Show Snackbar',
-              onPressed: () {
-                GoRouter.of(context).goNamed('connection');
-              },
-            ),
-          ],
+          title: const Text('Liste des produits'),actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.logout),
+          tooltip: 'Show Snackbar',
+          onPressed: () {
+            GoRouter.of(context).goNamed('connection');
+          },
+        ),
+      ]
+          ,
           backgroundColor: headerBackgroundColor),
       body: FutureBuilder<List<Product>>(
         future: getProductsFromMock(),

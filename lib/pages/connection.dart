@@ -25,7 +25,6 @@ class _ConnectionPageState extends State<ConnectionPage> {
               Container(
                 color: Colors.white,
                 width: MediaQuery.of(context).size.width,
-                //height: MediaQuery.of(context).size.height / 3,
                 child: Align(
                     alignment: Alignment.center,
                     child: Image.asset(
