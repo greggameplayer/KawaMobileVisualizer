@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/models/Product.dart';
@@ -7,7 +5,7 @@ import 'package:kawa_mobile_visualizer/services/product_api.dart';
 
 import '../../utils/constants.dart';
 import '../../widgets/button.dart';
-import 'model3dViewer.dart';
+import 'ViewerModel3D.dart';
 
 class ProductDetails extends StatefulWidget {
   //final String productName;
@@ -23,25 +21,23 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
-    late Product productDetails;
-
     return Scaffold(
       appBar: AppBar(
           title: Text(widget.productName), backgroundColor: headerBackgroundColor),
       body: FutureBuilder<Product>(
         //future: getOneProductFromMock(ModalRoute.of(context)!.settings.arguments as String),
-        future: getOneProductFromMock(widget.productId),
+        future: getOneProductFromMock(context, widget.productId),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var productDetails = snapshot.data!;
             return Column(children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 30.0, horizontal: 20.0),
                   child: Text(
-                    "Description : " + productDetails.details!.description!,
+                    "Description : ${productDetails.details!.description!}",
                     style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -49,13 +45,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 0.0, horizontal: 20.0),
                   child: Text(
-                    "Prix : " + productDetails.details!.price! + "€",
+                    "Prix : ${productDetails.details!.price!}€",
                     style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -64,7 +60,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
               Expanded(
-                child: Container(
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Column(children: [
                     Expanded(

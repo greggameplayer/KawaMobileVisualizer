@@ -114,7 +114,7 @@ class ConnectionFormState extends State<ConnectionForm> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Veuillez saisir token';
+                  return 'Veuillez saisir le token';
                 }
                 return null;
               },

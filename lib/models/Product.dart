@@ -21,7 +21,7 @@ class Product {
     details =
     json['details'] != null ? new Details.fromJson(json['details']) : null;
     stock = json['stock'];
-    id = json['id'];
+    id = json['_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -32,7 +32,7 @@ class Product {
       data['details'] = this.details!.toJson();
     }
     data['stock'] = this.stock;
-    data['id'] = this.id;
+    data['_id'] = this.id;
     return data;
   }
 }

@@ -4,8 +4,6 @@ import 'package:kawa_mobile_visualizer/services/product_api.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/constants.dart';
-import '../connection.dart';
-import 'ProductDetails.dart';
 
 class DashboardProduct extends StatefulWidget {
   const DashboardProduct({super.key});
@@ -31,7 +29,7 @@ class _DashboardProductState extends State<DashboardProduct> {
           ,
           backgroundColor: headerBackgroundColor),
       body: FutureBuilder<List<Product>>(
-        future: getProductsFromMock(),
+        future: getProductsFromMock(context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(

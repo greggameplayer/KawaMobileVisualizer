@@ -6,7 +6,7 @@ import 'package:kawa_mobile_visualizer/pages/connection.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kawa_mobile_visualizer/pages/product/DashboardProduct.dart';
 import 'package:kawa_mobile_visualizer/pages/product/ProductDetails.dart';
-import 'package:kawa_mobile_visualizer/pages/product/model3dViewer.dart';
+import 'package:kawa_mobile_visualizer/pages/product/ViewerModel3D.dart';
 import 'package:kawa_mobile_visualizer/pages/scan_qr_code.dart';
 
 import 'models/Product.dart';
