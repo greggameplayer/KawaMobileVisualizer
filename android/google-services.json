@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "45633223408",
+    "project_id": "kawamobilevisualizer",
+    "storage_bucket": "kawamobilevisualizer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45633223408:android:adb07822a5185d4a0aa035",
+        "android_client_info": {
+          "package_name": "com.kawa.kawa_mobile_visualizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45633223408-mmombrthio71v3k7rou8c7v6flfoh3lo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2y7smZ22nHkizvJBzwfuO0d3IYtz7vVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "45633223408-mmombrthio71v3k7rou8c7v6flfoh3lo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "45633223408-ut0kc3hf97puifrv9go62r5mbho9tukp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kawa.kawaMobileVisualizer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
